@@ -30,6 +30,7 @@ The files in `deploy/` are templates and examples intended to be adapted on the 
 - `deploy/scripts/switch-nginx-to-tls.sh`: switches nginx from bootstrap HTTP to the final TLS config
 - `deploy/scripts/smoke-test.sh`: server-side smoke test for endpoints and host services
 - `deploy/scripts/backup-state.sh`: creates a config/key archive and PostgreSQL dump
+- `deploy/scripts/retry-git-push.ps1`: retries `git push` over SSH when GitHub network access is flaky
 - `docs/README.md`: documentation entry point and reading order
 - `docs/bootstrap-debian12.md`: Debian 12 bootstrap and service bring-up guide
 - `docs/deployment-checklist.md`: deployment validation and smoke-test checklist
@@ -78,3 +79,4 @@ The files in `deploy/` are templates and examples intended to be adapted on the 
 - Use `docs/vps-runbook.md` if you want the exact command order for first deployment.
 - Use `docs/quick-runbook.md` if you want the shortest linear command sequence.
 - Use `docs/cutover-checklist.md` and `docs/rollback-guide.md` for launch-day control and rollback.
+- If GitHub SSH is flaky from Windows, run `pwsh -File deploy/scripts/retry-git-push.ps1` from the repo root.
