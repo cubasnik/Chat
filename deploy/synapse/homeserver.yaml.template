@@ -1,0 +1,103 @@
+server_name: "${DOMAIN}"
+public_baseurl: "${PUBLIC_BASEURL}"
+
+pid_file: /data/homeserver.pid
+
+listeners:
+  - port: 8008
+    tls: false
+    type: http
+    x_forwarded: true
+    bind_addresses: ['0.0.0.0']
+    resources:
+      - names: [client]
+        compress: false
+
+database:
+  name: psycopg2
+  args:
+    host: postgres
+    database: ${POSTGRES_DB}
+    user: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    cp_min: 5
+    cp_max: 10
+
+enable_registration: false
+enable_registration_without_verification: false
+registration_shared_secret: "${REGISTRATION_SHARED_SECRET}"
+admin_contact: "${ADMIN_CONTACT}"
+
+password_config:
+  enabled: true
+  pepper: "${PASSWORD_PEPPER}"
+  policy:
+    enabled: true
+    minimum_length: 14
+    require_digit: true
+    require_symbol: true
+    require_lowercase: true
+    require_uppercase: true
+
+encryption_enabled_by_default_for_room_type: invite
+require_auth_for_profile_requests: true
+limit_profile_requests_to_users_who_share_rooms: true
+include_profile_data_on_invite: false
+allow_public_rooms_without_auth: false
+allow_public_rooms_over_federation: false
+allow_profile_lookup_over_federation: false
+allow_device_name_lookup_over_federation: false
+request_token_inhibit_3pid_errors: true
+
+enable_room_list_search: false
+user_directory:
+  enabled: true
+  search_all_users: false
+  prefer_local_users: true
+  exclude_remote_users: true
+
+room_list_publication_rules:
+  - action: deny
+
+auto_join_rooms:
+  - "${AUTO_JOIN_ROOM_ALIAS}"
+autocreate_auto_join_rooms: true
+autocreate_auto_join_rooms_federated: false
+autocreate_auto_join_room_preset: public_chat
+auto_join_rooms_for_guests: false
+
+server_notices:
+  system_mxid_localpart: "${SERVER_NOTICES_MXID_LOCALPART}"
+  system_mxid_display_name: "${SERVER_NOTICES_DISPLAY_NAME}"
+  room_name: "${SERVER_NOTICES_ROOM_NAME}"
+  room_topic: "${SERVER_NOTICES_ROOM_TOPIC}"
+  auto_join: true
+
+media_store_path: /data/media_store
+enable_authenticated_media: true
+max_upload_size: ${MAX_UPLOAD_SIZE}
+media_retention:
+  local_media_lifetime: ${LOCAL_MEDIA_RETENTION}
+  remote_media_lifetime: ${REMOTE_MEDIA_RETENTION}
+
+retention:
+  enabled: true
+  default_policy:
+    max_lifetime: ${MESSAGE_RETENTION_MAX}
+  allowed_lifetime_max: ${MESSAGE_RETENTION_MAX}
+  purge_jobs:
+    - interval: 1d
+
+redaction_retention_period: ${REDACTION_RETENTION}
+forgotten_room_retention_period: ${FORGOTTEN_ROOM_RETENTION}
+user_ips_max_age: ${USER_IPS_MAX_AGE}
+delete_stale_devices_after: ${DELETE_STALE_DEVICES_AFTER}
+
+turn_uris:
+  - "turn:${TURN_HOST}?transport=udp"
+  - "turn:${TURN_HOST}?transport=tcp"
+turn_shared_secret: "${TURN_SECRET}"
+turn_user_lifetime: 1h
+turn_allow_guests: false
+
+# Keep the generated signing key, macaroon secret, form secret, and log config values from the file created by Synapse.

@@ -1,0 +1,14 @@
+server {
+    listen 80;
+    server_name ${DOMAIN};
+
+    location /.well-known/matrix/client {
+        default_type application/json;
+        add_header Access-Control-Allow-Origin *;
+        return 200 '{"m.homeserver":{"base_url":"${PUBLIC_BASEURL}"}}';
+    }
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}

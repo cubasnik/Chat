@@ -1,0 +1,8 @@
+deploy/compose/.env
+deploy/synapse/homeserver.yaml
+deploy/synapse/*.signing.key
+deploy/synapse/*.log.config
+deploy/synapse/*.key
+deploy/element-web/config.json
+build/
+backups/
