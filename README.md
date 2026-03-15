@@ -30,6 +30,7 @@ The files in `deploy/` are templates and examples intended to be adapted on the 
 - `deploy/scripts/switch-nginx-to-tls.sh`: switches nginx from bootstrap HTTP to the final TLS config
 - `deploy/scripts/smoke-test.sh`: server-side smoke test for endpoints and host services
 - `deploy/scripts/backup-state.sh`: creates a config/key archive and PostgreSQL dump
+- `docs/README.md`: documentation entry point and reading order
 - `docs/bootstrap-debian12.md`: Debian 12 bootstrap and service bring-up guide
 - `docs/deployment-checklist.md`: deployment validation and smoke-test checklist
 - `docs/vps-runbook.md`: literal copy-paste operator runbook for the VPS
@@ -70,6 +71,7 @@ The files in `deploy/` are templates and examples intended to be adapted on the 
 - The Synapse template also includes stable password peppering, server notices, and a local auto-join onboarding room.
 - Keep generated Synapse keys and the PostgreSQL data directory backed up.
 - See `docs/bootstrap-debian12.md` for the exact host bootstrap sequence.
+- See `docs/README.md` for the recommended documentation order.
 - For near one-command host setup, use `deploy/scripts/first-boot-debian12.sh` on the VPS.
 - Run `deploy/scripts/post-install-hardening-debian12.sh` after base bring-up to enable firewall, fail2ban, unattended upgrades, and kernel/network hardening.
 - Use `docs/deployment-checklist.md` for the final acceptance pass.
